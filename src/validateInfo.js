@@ -14,8 +14,12 @@ export default function validateInfo(values) {
     errors.password = "Password required";
   } else if (values.password.length < 6) {
     errors.password = "Password needs to be 6 characters or more";
+  } else if (
+    !/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s)(?=.*[!@#$*])/.test(values.password)
+  ) {
+    errors.password =
+      "Password should contain at least one uppercase letter, lowercase letter, digit, and special symbol.";
   }
-
   if (!values.confirm_password) {
     errors.confirm_password = "Confirm Password required";
   } else if (values.confirm_password !== values.password) {
